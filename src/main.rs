@@ -101,8 +101,8 @@ fn main() -> Result<(), Whatever> {
             if (dev_descr.vendor_id(), dev_descr.product_id()) == (vendor_id, product_id) {
                 log::info!(
                     "Found device: {}:{}",
-                    &format!("{:#06}", vendor_id)[2..],
-                    &format!("{:#06}", product_id)[2..],
+                    &format!("{:#06x}", vendor_id)[2..],
+                    &format!("{:#06x}", product_id)[2..],
                 );
                 break Some((dev, dev_descr.max_packet_size()));
             }
