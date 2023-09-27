@@ -1,0 +1,101 @@
+inverter:
+  id: "powmr"
+  name: "PowMr Inverter"
+  manufacturer: "PowMr"
+  model: "PowMr 5000W DC 48V AC 220V All In One Inverter"
+  usb:
+    vendor_id: 0x0665
+    product_id: 0x5161
+    interface: 0
+    request_params:
+      request_type: 0x21
+      request: 0x9
+      value: 0x200
+      index: 0
+      timeout_ms: 100
+    response_params:
+      endpoint: 0x81
+      timeout_ms: 100
+  commands:
+  - command: "QPIGS"
+    sensors:
+    - name: grid_voltage
+      value_type: float
+      device_class: "voltage"
+      unit_of_measurement: "V"
+      icon: "mdi:power-plug"
+    - name: grid_frequency
+      value_type: float
+      device_class: "frequency"
+      unit_of_measurement: "Hz"
+      icon: "mdi:sine-wave"
+    - name: out_voltage
+      value_type: float
+      device_class: "voltage"
+      unit_of_measurement: "V"
+      icon: "mdi:power-plug"
+    - name: out_frequency
+      value_type: float
+      device_class: "frequency"
+      unit_of_measurement: "Hz"
+      icon: "mdi:sine-wave"
+    - name: load_va
+      human_name: "Load VA"
+      value_type: float
+      device_class: "power"
+      unit_of_measurement: "VA"
+      icon: "mdi:lightning-bolt"
+    - name: load_watt
+      value_type: float
+      device_class: "power"
+      unit_of_measurement: "W"
+      icon: "mdi:lightning-bolt"
+    - name: load_percent
+      value_type: float
+      device_class: "power"
+      unit_of_measurement: "%"
+      icon: "mdi:lightning-bolt"
+    - name: bus_voltage
+      value_type: float
+      device_class: "voltage"
+      unit_of_measurement: "V"
+      icon: "mdi:lightning-bolt"
+    - name: battery_voltage
+      value_type: float
+      device_class: "voltage"
+      unit_of_measurement: "V"
+      icon: "mdi:battery-outline"
+    - name: battery_charge_current
+      value_type: float
+      device_class: "current"
+      unit_of_measurement: "A"
+      icon: "mdi:current-dc"
+    - name: battery_capacity
+      value_type: float
+      device_class: "battery"
+      unit_of_measurement: "%"
+      icon: "mdi:battery-outline"
+    - name: heatsink_temperature
+      value_type: float
+      device_class: "Temperature"
+      unit_of_measurement: "°C"
+      icon: "mdi:thermometer"
+    - name: pv_input_voltage
+      human_name: "PV Input Voltage"
+      value_type: float
+      device_class: "voltage"
+      unit_of_measurement: "V"
+      icon: "mdi:solar-power-variant"
+    - name: scc_voltage
+      human_name: "SCC Voltage"
+      value_type: float
+      device_class: "voltage"
+      unit_of_measurement: "V"
+      icon: "mdi:solar-power-variant"
+    - name: battery_discharge_current
+      value_type: float
+      device_class: "current"
+      unit_of_measurement: "A"
+      icon: "mdi:current-dc"
+mqtt:
+  address: "localhost:1883"

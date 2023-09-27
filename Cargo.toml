@@ -1,14 +1,18 @@
 [package]
-name = "powmr2mqtt"
+name = "inverter2mqtt"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+clap = { version = "4.4.5", features = ["derive"] }
 crc = "3.0.1"
+env_logger = "0.10.0"
+log = "0.4.20"
 paho-mqtt = { version = "0.12.2", features = ["vendored-ssl"] }
 rusb = "0.9.3"
 serde = { version = "1.0.188", features = ["derive"] }
 serde_json = "1.0.107"
+serde_yaml = "0.9.25"
 snafu = "0.7.5"
