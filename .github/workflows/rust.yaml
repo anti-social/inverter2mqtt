@@ -11,12 +11,37 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
+
     - name: Build
       run: cargo build --verbose
+
     - name: Run tests
       run: cargo test --verbose
+
+  release:
+    runs-on: ubuntu-latest
+    needs:
+    - build
+    # if: startsWith(github.event.ref, 'refs/tags/v')
+    strategy:
+      matrix:
+        include:
+        - target: x86_64-unknown-linux-musl
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build release
+      uses: actions-rs/cargo@v1
+      with:
+        use-cross: true
+        command: build
+        args: --release --target=${{ matrix.target }}
+
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          target/${{ matrix.target }}/release/inverter2mqtt
