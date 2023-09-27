@@ -13,4 +13,4 @@ cargo build --release
 ./target/release/inverter2mqtt powmr.yaml
 ```
 
-You can find an example configuration file for `PowMr` inverter in the repository: `powmr.yaml`
+You can find an example configuration file for `PowMr` inverter in the repository: [powmr.yaml](https://github.com/anti-social/inverter2mqtt/blob/master/powmr.yaml)
