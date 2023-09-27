@@ -19,4 +19,4 @@ You can find an example configuration file for `PowMr` inverter in the repositor
 
 Sensors data should be caught by Home Assistant automatically.
 
-[![Home Assistant Sensors](img/hass-sensors.png)]
+![Home Assistant Sensors](img/hass-sensors.png)
