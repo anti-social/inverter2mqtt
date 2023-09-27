@@ -3,9 +3,12 @@ Dump inverter sensors into mqtt
 
 At the moment program only supports interacting with an invertor via a raw `USB` interface. `RS-232` support will be added later.
 
-The program was written for the following invertor:
+The program was written for the `PowMr 5KVA 48V`:
 
 ![PowMr 5KVA 48V](img/POWMR-5KVA-48V.webp)
+
+Special thanks to Dolf Andringa for his beautiful article:
+[Reverse engineering cypress serial USB](http://allican.be/blog/2017/01/28/reverse-engineering-cypress-serial-usb)
 
 # Build
 
