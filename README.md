@@ -1,6 +1,8 @@
 # Inverter data to MQTT
 Dump inverter sensors into mqtt
 
+At the moment program only supports interacting with an invertor via a raw `USB` interface. `RS-232` support will be added later.
+
 # Build
 
 ```bash
