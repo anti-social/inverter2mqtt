@@ -203,7 +203,7 @@ fn create_entities(
             };
             let entity_msg = serde_json::to_string(&hass_discovery)
                 .with_whatever_context(|e| format!("Error when serializing discovery message: {e}"))?;
-            let discovery_msg = mqtt::Message::new(
+            let discovery_msg = mqtt::Message::new_retained(
                 entity_config_topic.clone(),
                 entity_msg.clone(),
                 0
