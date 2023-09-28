@@ -20,6 +20,8 @@ use inverter::{DeviceError, Inverter, InverterDevice, MAX_COMMAND_LENGTH, Sensor
 const INVERTER_QUERY_INTERVAL_SECS: u64 = 30;
 const INVERTER_RETRY_DELAY_SECS: u64 = 10;
 const MQTT_RETRY_DELAY_SECS: u64 = 10;
+const MQTT_MIN_RETRY_INTERVAL_SECS: u64 = 1;
+const MQTT_MAX_RETRY_INTERVAL_SECS: u64 = 60;
 
 #[derive(Parser, Debug)]
 struct Args {
@@ -143,7 +145,13 @@ fn establish_mqtt_conn(cfg: &MqttConfig) -> Result<mqtt::Client, Whatever> {
         .with_whatever_context(|e| format!("Error creating mqtt client: {e}"))?;
     let mut conn_opts_builder = mqtt::ConnectOptionsBuilder::new();
     conn_opts_builder
-        .keep_alive_interval(Duration::from_secs(INVERTER_QUERY_INTERVAL_SECS * 2))
+        .keep_alive_interval(
+            Duration::from_secs(INVERTER_QUERY_INTERVAL_SECS * 2)
+        )
+        .automatic_reconnect(
+            Duration::from_secs(MQTT_MIN_RETRY_INTERVAL_SECS),
+            Duration::from_secs(MQTT_MAX_RETRY_INTERVAL_SECS)
+        )
         .clean_session(true);
     if let Some(auth) = &cfg.auth {
         conn_opts_builder
@@ -259,7 +267,6 @@ fn run<T: InverterDevice>(
                     0
                 );
 
-                // TODO: Reconnect on disconnection
                 log::trace!("Sending message to {entity_state_topic}: {entity_value}");
                 if let Err(e) = mqtt_client.publish(entity_state_msg) {
                     log::warn!("Cannot publish entity state: {e}");
